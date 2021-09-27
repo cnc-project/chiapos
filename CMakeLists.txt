@@ -154,6 +154,9 @@ find_package(Threads REQUIRED)
 add_library(uint128 STATIC uint128_t/uint128_t.cpp)
 target_include_directories(uint128 PUBLIC uint128_t)
 
+set_source_files_properties(src/c_interface.c PROPERTIES LANGUAGE CXX )
+add_library(cgo STATIC src/c_interface.c src/chacha8.c ${BLAKE3_SRC})
+
 target_compile_features(fse PUBLIC cxx_std_17)
 target_compile_features(chiapos PUBLIC cxx_std_17)
 target_compile_features(RunTests PUBLIC cxx_std_17)
